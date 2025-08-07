@@ -1,9 +1,10 @@
 const mongoose = require('mongoose'); // importamos la librería Mongoose
 const path = require('path'); 
+require('dotenv').config();
 const { verificarToken } = require('./seguridad/auth');
 // URI de conexión a MongoDB (MongoDB Atlas en este caso). 
 // Reemplaza <usuario>, <password> y <tuBase> por tus datos reales.
-const mongoURI = "mongodb+srv://Vero_Madriz:ayumuCh4nh1@cluster0.l5dabif.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const mongoURI = process.env.DB_HOST;
 
 // Opciones recomendadas para evitar advertencias (según la versión de Mongoose)
 const options = {
@@ -36,6 +37,11 @@ app.get('/registro', (req, res) => {
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
+
+app.get('/carrusel', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'carrusel.html'));
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor API escuchando en http://localhost:${PORT}`);
